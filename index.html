@@ -5,71 +5,45 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <script src="./script.js"></script>
+    <script src="./script.js" defer></script>
     <title>Quests Menu</title>
 </head>
 <body>
     <div id="quests-menu">
         <div id="options-conteiner">
-            <button class="button quests-buttons" title="História">História</button>
-            <button class="button quests-buttons" title="Missões de Progresso">Missões de Progresso</button>
+            <button id="menu-history-button" class="button quests-buttons" title="História">História</button>
+            <button id="menu-progress-button" class="button quests-buttons" title="Missões de Progresso">Progresso</button>
         </div>
 
         <div id="quests-conteiner">
-            <div id="history-quests">
+            <div id="history-quests" class="active">
                 <div class="quest"title="Tutorial">
                     <label for="number-quest" title="Número da missão" hidden>Número da missão</label>
                     <input class="number-quest" name="number-quest" type="number" value="00" readonly title="Número da missão">
                     
-                    <div>
+                    <div class="quest-informations">
                         <p class="quest-title">
                             Tutorial
                         </p>
                     </div>
                 </div>
-                
-                <div id="quest1" class="quest" title="Início">
-                    <label for="number-quest" hidden title="Número da missão">Número da missão</label>
-                    <input class="number-quest" name="number-quest" type="number" value="01" readonly title="Número da missão">
-                    
-                    <div class="quest-informations">
-                        <p class="quest-title">
-                            Início
-                        </p>
-
-                        <p class="quest-rewards">
-                            800 XP points e 900 coins
-                        </p>
-                    </div>
-                </div>
-                
-                <div id="quest2" class="quest" title="Kaboom">
-                    <label for="number-quest" hidden title="Número da missão">Número da missão</label>
-                    <input class="number-quest" name="number-quest" type="number" value="02" readonly title="Número da missão">
-                    
-                    <div class="quest-informations">
-                        <p class="quest-title">
-                            Kaboom
-                        </p>
-
-                        <p class="quest-rewards">
-                            800 XP points e 900 coins
-                        </p>
-                    </div>
-                </div>
             </div>
 
-            <!--
-            <div id="progress-quests">
+            <div id="progress-quests" >
                 <div class="quest">
-                    Tutorial
+                    <p class="quest-title">
+                        Teste
+                    </p>
+
+                    <p class="quest-rewards">
+                        25 XP points e 100 coins
+                    </p>
                 </div>
             </div>
-            -->
         </div>
 
         <div class="button-conteiner">
-            <button class="button">Fechar</button>
+            <button class="button" id="close-quests-menu-button">Fechar</button>
         </div>
     </div>
 </body>

@@ -19,8 +19,22 @@ body{
 	align-items: center;
 	gap: .5rem;
 
+	width: 50%;
 	border: 1px #aaa solid;
   	padding: 2rem;
+}
+
+@media(max-width: 720px){
+	#quests-menu{
+		width: 90%;
+		padding: 1rem;
+	}
+}
+
+@media(max-width: 300px){
+	#quests-menu{
+		width: 100%;
+	}
 }
 
 .button{
@@ -54,15 +68,27 @@ body{
 	gap: 2rem;
 
 	height: 60vh;
-	overflow-y: scroll;
+	overflow-y: auto;
 }
 
 #history-quests, #progress-quests{
+	position: absolute;
 	display: flex;
 	align-items: center;
 	justify-content: space-around;
 	flex-direction: column;
 	gap: .4rem;
+
+	padding: .5rem 1rem;
+
+	visibility: hidden;
+	opacity: 0;
+}
+
+#history-quests.active, #progress-quests.active{
+	position: static;
+	visibility: visible;
+	opacity: 1;
 }
 
 .quest{
@@ -77,21 +103,32 @@ body{
 	cursor: pointer;
 }
 
+#progress-quests .quest{
+	flex-direction: column;
+	align-items: flex-start;
+}
+
 .quest:hover, .quest:hover .number-quest, .quest:hover div{
 	color: #f00;
 	border-color: #f00;
 }
 
-/*
-.quest div{
-	display: flex;
-}
-*/
 .number-quest{
-	width: 10%;
+	width: 30%;
 
 	font-size: 1rem;
 	border: none;
 
 	cursor: pointer;
+}
+
+#close-quests-menu-button{
+	font-size: 1.25rem;
+	background-color: #a00;
+	color: #fff;
+	border: none;
+}
+
+#close-quests-menu-button:hover{
+	background-color: #e00;
 }
