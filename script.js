@@ -95,7 +95,47 @@ const QuestsMenu = {
 
     // * Objeto para a manipulação do menu de progresso
     Progress: {
-        conteiner: document.getElementById('progress-quests')
+        conteiner: document.getElementById('progress-quests'),
+        currentNumbering: 0,
+
+        // * Método para a adição de quests ao menu do progresso
+        addQuestOnMenu(quest = {}){
+            const elementQuest = document.createElement('div')
+
+            QuestsMenu.Progress.currentNumbering = QuestsMenu.Progress.currentNumbering + 1
+
+            // * Escopo para a configuração do elemento da Quest
+            {
+                elementQuest.setAttribute("id", `progress${QuestsMenu.Progress.currentNumbering}`)
+                elementQuest.classList.add('quest')
+                elementQuest.setAttribute("title", quest.name)
+            }
+
+            QuestsMenu.Progress.addInformationsOnQuest(quest, elementQuest)
+
+            QuestsMenu.Progress.conteiner.appendChild(elementQuest)
+        },
+
+        // * Método para a adição das informações das quests
+        // ! Atenção, não chame esse método diretamente, ele só funciona em conjunto com o `QuestsMenu.Progress.addQuestOnMenu()`
+        addInformationsOnQuest(quest = {}, elementQuest){
+            let questInformations = document.createElement('div'), questTitle = document.createElement('p'), questRewards = document.createElement('p')
+            
+            // * Escopo para a configuração do título e das recompensas da quest
+            {
+                questInformations.classList.add('quest-informations')
+
+                questTitle.classList.add('quest-title')
+                questTitle.innerText = quest.name
+
+                questRewards.classList.add('quest-rewards')
+                questRewards.innerText = `${quest.xp} XP points e ${quest.money} coins`
+            }
+
+            elementQuest.appendChild(questInformations)
+            questInformations.appendChild(questTitle)
+            questInformations.appendChild(questRewards)
+        }
     },
 
     // * Método para fazer a mudança dinâmica do menu de progresso para o menu da história
