@@ -223,3 +223,16 @@ const PopUp = {
         alert('HI')
     })
 }
+
+// * Escopo para a renderização das Quests
+{
+    // * Renderizando as quests do menu de História
+    for (const quest in HistoryQuests) {
+        QuestsMenu.History.addQuestOnMenu(HistoryQuests[`${quest}`])
+    }
+
+    // * Renderizando as quests do menu de Progresso
+    for (const quest in ProgressQuests) {
+        QuestsMenu.Progress.addQuestOnMenu(Progress[`${quest}`])
+    }
+}
