@@ -17,7 +17,7 @@
 
         <div id="quests-conteiner">
             <div id="history-quests" class="active">
-                <div class="quest"title="Tutorial">
+                <div class="quest" id="tutorial" title="Tutorial" onclick="PopUp.questsInformations.open(document.querySelector('.quest#tutorial'))">
                     <label for="number-quest" title="Número da missão" hidden>Número da missão</label>
                     <input class="number-quest" name="number-quest" type="number" value="00" readonly title="Número da missão">
                     
@@ -25,14 +25,26 @@
                         <p class="quest-title">
                             Tutorial
                         </p>
+
+                        <p class="quest-description" hidden>
+                            Bem vindo ao game!! Está preparado para uma aventura emocionante e sem igual ? Então se prepare o coração vem aprender a jogar conosco antes de iniciar sua aventura! <span>Por enquanto estamos em desenvolvimento, aguarde novas atualizações!</span>
+                        </p>
+    
+                        <p class="quest-rewards" hidden>
+                            Sua recompensa é aprender a como fazer recompensas ;)
+                        </p>
                     </div>
                 </div>
             </div>
 
             <div id="progress-quests" >
-                <div class="quest">
+                <div class="quest" id="progress1" onclick="PopUp.questsInformations.open(document.querySelector('.quest#progress1'))">
                     <p class="quest-title">
                         Teste
+                    </p>
+
+                    <p class="quest-description" hidden>
+                        É só um teste
                     </p>
 
                     <p class="quest-rewards">
@@ -47,22 +59,22 @@
         </div>
     </div>
 
-    <div class="popup-conteiner not-active">
-        <div class="pop-up" id="quest-informations-popup">
-            <h2>Título da quest</h2>
+    <div class="popup-conteiner not-active" id="quest-informations-popup">
+        <div class="pop-up">
+            <h2 id="informations-quest-title">Título da quest</h2>
             
             <h3>Descrição:</h3>
-            <p>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Officia, ea! Dicta nulla distinctio doloribus sed quibusdam, molestias facere non suscipit omnis nostrum culpa earum quisquam, veritatis aspernatur ab dolore excepturi.
+            <p id="informations-quest-description">
+                Descrição...
             </p>
 
             <h3>Recompensas:</h3>
-            <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            <p id="informations-quest-rewards">
+                Recompensas
             </p>
 
             <div class="button-conteiner">
-                <button class="button" id="doQuest-button">Fazer Quest</button>
+                <button class="button" id="doQuest-button" onclick="alert('Opa, parece que realizar a quest ainda não é possível')">Fazer Quest</button>
                 <button class="button" id="exit-quest-button">Sair</button>
             </div>
         </div>

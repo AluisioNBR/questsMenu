@@ -238,7 +238,7 @@ body{
 
 /* ################################ */
 
-#quest-informations-popup{
+#quest-informations-popup .pop-up{
 	width: 50%;
 }
 
@@ -271,7 +271,7 @@ body{
 		padding: 1rem;
 	}
 
-	#quest-informations-popup{
+	#quest-informations-popup .pop-up{
 		width: 90%;
 	}
 }
@@ -281,7 +281,7 @@ body{
 		width: 100%;
 	}
 
-	#quest-informations-popup{
+	#quest-informations-popup .pop-up{
 		width: 100%;
 	}
 }

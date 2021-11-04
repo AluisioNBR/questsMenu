@@ -40,6 +40,7 @@ const QuestsMenu = {
             {
                 elementQuest.setAttribute("id", `quest${QuestsMenu.History.currentNumbering}`)
                 elementQuest.classList.add('quest')
+                elementQuest.setAttribute('onclick', `PopUp.questsInformations.open(document.querySelector('.quest#quest${QuestsMenu.History.currentNumbering}'))`)
                 elementQuest.setAttribute("title", quest.name)
             }
             
@@ -74,14 +75,18 @@ const QuestsMenu = {
         // * Método para a adição das informações das quests
         // ! Atenção, não chame esse método diretamente, ele só funciona em conjunto com o `QuestsMenu.History.addQuestOnMenu()`
         addInformationsOnQuest(quest = {}, elementQuest){
-            let questInformations = document.createElement('div'), questTitle = document.createElement('p'), questRewards = document.createElement('p')
+            let questInformations = document.createElement('div'), questTitle = document.createElement('p'), questDescription = document.createElement('p'), questRewards = document.createElement('p')
             
-            // * Escopo para a configuração do título e das recompensas da quest
+            // * Escopo para a configuração do título, da descrição e das recompensas da quest
             {
                 questInformations.classList.add('quest-informations')
 
                 questTitle.classList.add('quest-title')
                 questTitle.innerText = quest.name
+
+                questDescription.classList.add('quest-description')
+                questDescription.setAttribute('hidden', '')
+                questDescription.innerText = quest.description
 
                 questRewards.classList.add('quest-rewards')
                 questRewards.innerText = `${quest.xp} XP points e ${quest.money} coins`
@@ -89,6 +94,7 @@ const QuestsMenu = {
 
             elementQuest.appendChild(questInformations)
             questInformations.appendChild(questTitle)
+            questInformations.appendChild(questDescription)
             questInformations.appendChild(questRewards)
         }
     },
@@ -96,7 +102,7 @@ const QuestsMenu = {
     // * Objeto para a manipulação do menu de progresso
     Progress: {
         conteiner: document.getElementById('progress-quests'),
-        currentNumbering: 0,
+        currentNumbering: 1,
 
         // * Método para a adição de quests ao menu do progresso
         addQuestOnMenu(quest = {}){
@@ -108,6 +114,7 @@ const QuestsMenu = {
             {
                 elementQuest.setAttribute("id", `progress${QuestsMenu.Progress.currentNumbering}`)
                 elementQuest.classList.add('quest')
+                elementQuest.setAttribute('onclick', `PopUp.questsInformations.open(document.querySelector('.quest#progress${QuestsMenu.Progress.currentNumbering}'))`)
                 elementQuest.setAttribute("title", quest.name)
             }
 
@@ -119,7 +126,7 @@ const QuestsMenu = {
         // * Método para a adição das informações das quests
         // ! Atenção, não chame esse método diretamente, ele só funciona em conjunto com o `QuestsMenu.Progress.addQuestOnMenu()`
         addInformationsOnQuest(quest = {}, elementQuest){
-            let questInformations = document.createElement('div'), questTitle = document.createElement('p'), questRewards = document.createElement('p')
+            let questInformations = document.createElement('div'), questTitle = document.createElement('p'), questDescription = document.createElement('p'), questRewards = document.createElement('p')
             
             // * Escopo para a configuração do título e das recompensas da quest
             {
@@ -128,12 +135,17 @@ const QuestsMenu = {
                 questTitle.classList.add('quest-title')
                 questTitle.innerText = quest.name
 
+                questDescription.classList.add('quest-description')
+                questDescription.setAttribute('hidden', '')
+                questDescription.innerText = quest.description
+
                 questRewards.classList.add('quest-rewards')
                 questRewards.innerText = `${quest.xp} XP points e ${quest.money} coins`
             }
 
             elementQuest.appendChild(questInformations)
             questInformations.appendChild(questTitle)
+            questInformations.appendChild(questDescription)
             questInformations.appendChild(questRewards)
         }
     },
@@ -157,17 +169,56 @@ const QuestsMenu = {
     }
 }
 
+const HistoryQuests = {
+    quest1: new Quest('Iniciando a Jornada', 'Assim se inicia sua aventura no mundo fantástico de The Core of Shadows, aproveite', 100, 50)
+}
+
+const ProgressQuests = {}
+
 // * Objeto para os botõs do HTML
 const ButtonsHTML = {
     menuHistoryButton: document.getElementById('menu-history-button'),
     menuProgressButton: document.getElementById('menu-progress-button'),
-    closeQuestsMenuButton: document.getElementById('close-quests-menu-button')
+    closeQuestsMenuButton: document.getElementById('close-quests-menu-button'),
+    closeQuestsInformationsPopUp: document.getElementById('exit-quest-button')
+}
+
+// * Objeto para cuidar dos pop-ups
+const PopUp = {
+    questsInformations: {
+        pop: document.getElementById('quest-informations-popup'),
+        currentQuest: document.getElementById,
+        
+        open(quest){
+            PopUp.questsInformations.currentQuest = quest
+
+            PopUp.questsInformations.updateContent()
+            PopUp.questsInformations.pop.classList.remove('not-active')
+            PopUp.questsInformations.pop.classList.add('active')
+        },
+
+        close(){
+            PopUp.questsInformations.pop.classList.remove('active')
+            PopUp.questsInformations.pop.classList.add('not-active')
+        },
+
+        updateContent(){
+            const title = document.getElementById('informations-quest-title'), description = document.getElementById('informations-quest-description'), rewards = document.getElementById('informations-quest-rewards')
+            
+            const questTitle = document.querySelector(`#${this.currentQuest.id} .quest-title`), questDescription = document.querySelector(`#${this.currentQuest.id} .quest-description`), questRewards = document.querySelector(`#${this.currentQuest.id} .quest-rewards`)
+
+            title.innerText = questTitle.textContent
+            description.innerText = questDescription.textContent
+            rewards.innerText = questRewards.textContent
+        }
+    }
 }
 
 // * Escopo para a inicialização dos botões do HTML
 {
     ButtonsHTML.menuHistoryButton.addEventListener('click', QuestsMenu.changeToHistoryMenu)
     ButtonsHTML.menuProgressButton.addEventListener('click', QuestsMenu.changeToProgressMenu)
+    ButtonsHTML.closeQuestsInformationsPopUp.addEventListener('click', PopUp.questsInformations.close)
     ButtonsHTML.closeQuestsMenuButton.addEventListener('click', function (){
         alert('HI')
     })
