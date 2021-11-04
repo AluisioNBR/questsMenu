@@ -24,19 +24,6 @@ body{
   	padding: 2rem;
 }
 
-@media(max-width: 720px){
-	#quests-menu{
-		width: 90%;
-		padding: 1rem;
-	}
-}
-
-@media(max-width: 300px){
-	#quests-menu{
-		width: 100%;
-	}
-}
-
 .button{
 	font-size: 1rem;
 	padding: .5rem;
@@ -173,4 +160,128 @@ body{
 
 #close-quests-menu-button:hover{
 	background-color: #e00;
+}
+
+/* Estilos padrão dos pop-up */
+
+.popup-conteiner{
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 2;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	width: 100vw;
+	height: 100vh;
+	background-color: #00000076;	
+}
+
+.popup-conteiner.not-active{
+	opacity: 0;
+	visibility: hidden;
+
+	animation-name: closePopUp;
+	animation-duration: .2s;
+}
+
+.popup-conteiner.active{
+	opacity: 1;
+	visibility: visible;
+
+	animation-name: openPopUp;
+	animation-duration: .2s;
+}
+
+/* Keyframes da animação de abertura/fechamento dos pop-ups */
+
+@keyframes openPopUp{
+	from {
+		opacity: 0;
+		visibility: hidden;
+	}
+
+	to {
+		opacity: 1;
+		visibility: visible;
+	}
+}
+
+@keyframes closePopUp{
+	from {
+		opacity: 1;
+		visibility: visible;
+	}
+
+	to {
+		opacity: 0;
+		visibility: hidden;
+	}
+}
+
+/* ################################ */
+
+.pop-up{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-evenly;
+	gap: 1rem;
+
+	background-color: #fff;
+	border: 1px solid #555555aa;
+	border-radius: 10%;
+	padding: 2rem;
+}
+
+/* ################################ */
+
+#quest-informations-popup{
+	width: 50%;
+}
+
+#doQuest-button, #exit-quest-button{
+	border: none;
+	font-size: 1.2rem;
+}
+
+#doQuest-button{
+	color: #fff;
+	background-color: #0a0;
+}
+
+#doQuest-button:hover{
+	background-color: #0d0;
+}
+
+#exit-quest-button{
+	color: #fff;
+	background-color: #a00;
+}
+
+#exit-quest-button:hover{
+	background-color: #d00;
+}
+
+@media(max-width: 720px){
+	#quests-menu{
+		width: 90%;
+		padding: 1rem;
+	}
+
+	#quest-informations-popup{
+		width: 90%;
+	}
+}
+
+@media(max-width: 300px){
+	#quests-menu{
+		width: 100%;
+	}
+
+	#quest-informations-popup{
+		width: 100%;
+	}
 }
